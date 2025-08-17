@@ -8,9 +8,10 @@ export const metadata: Metadata = {
 
 export const revalidate = 120
 
-export default async function BlogIndex({ searchParams }: { searchParams?: { page?: string } }) {
+export default async function BlogIndex({ searchParams }: { searchParams?: Promise<{ page?: string }> }) {
   const payload = await getPayload({ config: await config })
-  const page = Number(searchParams?.page || '1')
+  const sp = await searchParams
+  const page = Number(sp?.page || '1')
   const limit = 10
   const { docs, totalDocs } = await payload.find({
     collection: 'posts',

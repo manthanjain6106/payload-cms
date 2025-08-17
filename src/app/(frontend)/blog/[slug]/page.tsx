@@ -4,9 +4,10 @@ import { getPayload } from 'payload'
 import config from '@/payload.config'
 import { ArticleJsonLD } from './jsonld'
 
-type Params = { params: { slug: string } }
+type RouteParams = { params: Promise<{ slug: string }> }
 
-export async function generateMetadata({ params }: Params): Promise<Metadata> {
+export async function generateMetadata(props: RouteParams): Promise<Metadata> {
+  const params = await props.params
   const payload = await getPayload({ config: await config })
   const { docs } = await payload.find({
     collection: 'posts',
@@ -39,13 +40,14 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       title,
       description,
       images: image ? [image] : undefined,
-      site: settings?.defaultSEO?.twitterUsername,
+      site: settings?.defaultSEO?.twitterUsername ?? undefined,
     },
     robots: post.seo?.noIndex ? { index: false, follow: false } : undefined,
   }
 }
 
-export default async function PostPage({ params }: Params) {
+export default async function PostPage(props: RouteParams) {
+  const params = await props.params
   const payload = await getPayload({ config: await config })
   const { docs } = await payload.find({
     collection: 'posts',

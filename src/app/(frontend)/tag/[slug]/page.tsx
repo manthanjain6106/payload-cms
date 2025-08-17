@@ -3,9 +3,10 @@ import { notFound } from 'next/navigation'
 import { getPayload } from 'payload'
 import config from '@/payload.config'
 
-type Params = { params: { slug: string } }
+type RouteParams = { params: Promise<{ slug: string }> }
 
-export async function generateMetadata({ params }: Params): Promise<Metadata> {
+export async function generateMetadata(props: RouteParams): Promise<Metadata> {
+  const params = await props.params
   const payload = await getPayload({ config: await config })
   const { docs } = await payload.find({ collection: 'tags', where: { slug: { equals: params.slug } }, limit: 1 })
   const tag: any = docs[0]
@@ -13,7 +14,8 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   return { title: `Tag: ${tag.title}` }
 }
 
-export default async function TagPage({ params }: Params) {
+export default async function TagPage(props: RouteParams) {
+  const params = await props.params
   const payload = await getPayload({ config: await config })
   const { docs } = await payload.find({ collection: 'tags', where: { slug: { equals: params.slug } }, limit: 1 })
   const tag: any = docs[0]

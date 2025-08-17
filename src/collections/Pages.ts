@@ -51,7 +51,7 @@ export const Pages: CollectionConfig = {
       type: 'group',
       fields: [
         { name: 'exclude', label: 'Exclude from sitemap', type: 'checkbox', defaultValue: false },
-        { name: 'priority', type: 'number', min: 0, max: 1, step: 0.1 },
+        { name: 'priority', type: 'number', min: 0, max: 1, admin: { step: 0.1 } },
         { name: 'changefreq', type: 'select', options: [
           'always','hourly','daily','weekly','monthly','yearly','never'
         ].map(v => ({ label: v, value: v })), },
