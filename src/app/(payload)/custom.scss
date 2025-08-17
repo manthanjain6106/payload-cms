@@ -1,0 +1,65 @@
+/* Adjust visibility/height of the Posts `content` rich text editor in Admin */
+[data-field-name="content"] [contenteditable="true"] {
+  min-height: 240px;
+  padding: 12px;
+  overflow: auto;
+  border: 1px solid var(--theme-elevation-200, #3a3a3a);
+  border-radius: 8px;
+  background-color: var(--theme-elevation-50, transparent);
+  transition: border-color 120ms ease, background-color 120ms ease;
+}
+
+/* Optional: ensure borders/contrast are visible in dark mode */
+[data-theme="dark"] [data-field-name="content"] [contenteditable="true"] {
+  background-color: rgba(255, 255, 255, 0.02);
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+[data-field-name="content"] [contenteditable="true"]:hover {
+  background-color: var(--theme-elevation-75, rgba(0,0,0,0.02));
+}
+
+[data-field-name="content"] [contenteditable="true"]:focus {
+  outline: none;
+  border-color: var(--theme-elevation-400, #6b6b6b);
+}
+
+/* Make other basic inputs use the same boxed style */
+[data-theme] input[type="text"],
+[data-theme] input[type="email"],
+[data-theme] input[type="url"],
+[data-theme] input[type="number"],
+[data-theme] input[type="password"],
+[data-theme] textarea,
+[data-theme] select {
+  box-sizing: border-box;
+  width: 100%;
+  border: 1px solid var(--theme-elevation-200, #3a3a3a);
+  border-radius: 8px;
+  background-color: var(--theme-elevation-50, transparent);
+  padding: 10px 12px;
+  transition: border-color 120ms ease, background-color 120ms ease, box-shadow 120ms ease;
+}
+
+[data-theme] input[type="text"]:hover,
+[data-theme] input[type="email"]:hover,
+[data-theme] input[type="url"]:hover,
+[data-theme] input[type="number"]:hover,
+[data-theme] input[type="password"]:hover,
+[data-theme] textarea:hover,
+[data-theme] select:hover {
+  background-color: var(--theme-elevation-75, rgba(0,0,0,0.02));
+}
+
+[data-theme] input[type="text"]:focus,
+[data-theme] input[type="email"]:focus,
+[data-theme] input[type="url"]:focus,
+[data-theme] input[type="number"]:focus,
+[data-theme] input[type="password"]:focus,
+[data-theme] textarea:focus,
+[data-theme] select:focus {
+  outline: none;
+  border-color: var(--theme-elevation-400, #6b6b6b);
+  box-shadow: 0 0 0 2px color-mix(in oklab, var(--theme-elevation-400, #6b6b6b), transparent 80%);
+}
+
