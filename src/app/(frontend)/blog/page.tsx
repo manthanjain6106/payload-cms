@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: 'Blog',
 }
 
-export const revalidate = 120
+export const dynamic = 'force-dynamic'
 
 export default async function BlogIndex({ searchParams }: { searchParams?: Promise<{ page?: string }> }) {
   const payload = await getPayload({ config: await config })

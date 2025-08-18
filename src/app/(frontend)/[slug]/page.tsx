@@ -5,7 +5,7 @@ import config from '@/payload.config'
 
 type RouteParams = { params: Promise<{ slug: string }> }
 
-export const revalidate = 120
+export const dynamic = 'force-dynamic'
 
 export async function generateMetadata(
   props: RouteParams

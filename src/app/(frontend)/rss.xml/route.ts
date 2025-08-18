@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server'
 import { getPayload } from 'payload'
 import config from '@/payload.config'
 
+export const dynamic = 'force-dynamic'
+
 export async function GET() {
   const payload = await getPayload({ config: await config })
   const settings = await payload.findGlobal({ slug: 'settings' })

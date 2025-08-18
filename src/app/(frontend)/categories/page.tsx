@@ -3,6 +3,8 @@ import config from '@/payload.config'
 
 export const metadata = { title: 'Categories' }
 
+export const dynamic = 'force-dynamic'
+
 export default async function CategoriesPage() {
   const payload = await getPayload({ config: await config })
   const { docs } = await payload.find({ collection: 'categories', limit: 1000, depth: 0 })
